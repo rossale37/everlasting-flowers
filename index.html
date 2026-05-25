@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Everlasting Flowers — Flores Eternas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ─── VARIABLES ─────────────────────────────────── */
+:root {
+  --blush:    #fce8ee;
+  --rose:     #c0557a;
+  --deep:     #7a2442;
+  --petal:    #f0b8c8;
+  --dusty:    #d4899f;
+  --cream:    #fdf5f7;
+  --text:     #3d1a26;
+  --muted:    #9e6070;
+  --white:    #ffffff;
+  --serif:    'Cormorant Garamond', Georgia, serif;
+  --sans:     'Jost', sans-serif;
+  --ease:     cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── RESET & BASE ──────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--cream);
+  color: var(--text);
+  font-family: var(--sans);
+  font-weight: 300;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Custom cursor */
+.cursor {
+  width: 10px; height: 10px;
+  background: var(--rose);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.15s var(--ease), background 0.2s;
+  transform: translate(-50%, -50%);
+}
+.cursor-ring {
+  width: 36px; height: 36px;
+  border: 1.5px solid var(--rose);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transition: transform 0.35s var(--ease), width 0.3s, height 0.3s, opacity 0.3s;
+  transform: translate(-50%, -50%);
+  opacity: 0.6;
+}
+
+/* ─── NAV ───────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 3rem;
+  background: rgba(253,245,247,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(192,85,122,0.1);
+  transition: padding 0.3s var(--ease);
+}
+nav.scrolled { padding: 0.8rem 3rem; }
+
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-style: italic;
+  color: var(--deep);
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+.nav-logo span { color: var(--rose); font-style: normal; }
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+  align-items: center;
+}
+.nav-links a {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.2s;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  width: 0; height: 1px;
+  background: var(--rose);
+  transition: width 0.3s var(--ease);
+}
+.nav-links a:hover { color: var(--rose); }
+.nav-links a:hover::after { width: 100%; }
+
+.lang-toggle {
+  display: flex;
+  gap: 2px;
+  background: var(--blush);
+  border-radius: 20px;
+  padding: 3px;
+}
+.lang-btn {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  padding: 4px 12px;
+  border-radius: 16px;
+  border: none;
+  cursor: none;
+  background: transparent;
+  color: var(--muted);
+  transition: all 0.2s;
+}
+.lang-btn.active {
+  background: var(--rose);
+  color: white;
+}
+
+/* ─── HERO ──────────────────────────────────────── */
+#home {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding-top: 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-blob {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--petal);
+  opacity: 0.3;
+  animation: float 8s ease-in-out infinite;
+}
+.hero-blob:nth-child(1) { width: 500px; height: 500px; top: -100px; right: -100px; animation-delay: 0s; }
+.hero-blob:nth-child(2) { width: 300px; height: 300px; bottom: 50px; left: -80px; animation-delay: 3s; }
+.hero-blob:nth-child(3) { width: 180px; height: 180px; top: 40%; right: 35%; animation-delay: 5s; opacity: 0.15; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%       { transform: translateY(-20px) scale(1.03); }
+}
+
+.hero-content {
+  padding: 4rem 3rem 4rem 5rem;
+  position: relative; z-index: 1;
+  animation: fadeUp 1s var(--ease) both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-label {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hero-label::before {
+  content: '';
+  display: block;
+  width: 30px; height: 1px;
+  background: var(--rose);
+}
+
+.hero-h1 {
+  font-family: var(--serif);
+  font-size: clamp(42px, 6vw, 72px);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--deep);
+  margin-bottom: 1.5rem;
+}
+.hero-h1 em {
+  font-style: italic;
+  color: var(--rose);
+}
+
+.hero-sub {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 420px;
+  margin-bottom: 2.5rem;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 14px 36px;
+  background: var(--rose);
+  color: white;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: background 0.25s, transform 0.2s;
+}
+.btn-primary:hover { background: var(--deep); transform: translateY(-2px); }
+
+.btn-ghost {
+  display: inline-block;
+  padding: 13px 36px;
+  border: 1px solid var(--rose);
+  color: var(--rose);
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  margin-left: 12px;
+  transition: all 0.25s;
+}
+.btn-ghost:hover { background: var(--rose); color: white; }
+
+.hero-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  animation: fadeUp 1.2s 0.2s var(--ease) both;
+}
+
+.hero-collage {
+  position: relative;
+  width: 420px; height: 420px;
+}
+
+.hero-circle {
+  position: absolute;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid white;
+  box-shadow: 0 8px 32px rgba(192,85,122,0.2);
+  transition: transform 0.4s var(--ease);
+}
+.hero-circle:hover { transform: scale(1.05) rotate(2deg); }
+.hero-circle img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Canvas-based circles for strip image */
+.hero-canvas { border-radius: 50%; border: 4px solid white; box-shadow: 0 8px 32px rgba(192,85,122,0.2); position: absolute; }
+
+.c1 { width: 200px; height: 200px; top: 0;   left: 0; }
+.c2 { width: 150px; height: 150px; top: 0;   right: 30px; }
+.c3 { width: 130px; height: 130px; bottom: 60px; left: 20px; }
+.c4 { width: 170px; height: 170px; bottom: 10px; right: 10px; }
+
+/* ─── SECTION BASE ──────────────────────────────── */
+section { padding: 6rem 5rem; }
+.section-label {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-label::before {
+  content: '';
+  display: block;
+  width: 24px; height: 1px;
+  background: var(--rose);
+}
+.section-h2 {
+  font-family: var(--serif);
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 300;
+  color: var(--deep);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+.section-h2 em { font-style: italic; color: var(--rose); }
+
+/* ─── GALLERY ───────────────────────────────────── */
+#gallery { background: var(--blush); }
+
+.gallery-intro {
+  max-width: 500px;
+  margin-bottom: 3.5rem;
+}
+.gallery-intro p {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto;
+  gap: 16px;
+}
+.gallery-item {
+  border-radius: 50%;
+  overflow: hidden;
+  aspect-ratio: 1;
+  border: 3px solid white;
+  box-shadow: 0 4px 20px rgba(192,85,122,0.15);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s;
+  position: relative;
+}
+.gallery-item:hover {
+  transform: scale(1.06) rotate(-1deg);
+  box-shadow: 0 10px 36px rgba(192,85,122,0.28);
+}
+.gallery-item canvas,
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.g-large { grid-column: span 1; }
+/* Offset second row for organic feel */
+.gallery-row2 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  width: 75%;
+  margin: 16px auto 0;
+}
+
+/* ─── PRODUCTS ──────────────────────────────────── */
+#products { background: var(--cream); }
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 3rem;
+}
+.product-card {
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(122,36,66,0.07);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s;
+  position: relative;
+}
+.product-card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(122,36,66,0.13); }
+.product-card.featured {
+  grid-column: span 1;
+  border: 1.5px solid var(--petal);
+}
+.product-card.featured .featured-badge {
+  position: absolute;
+  top: 14px; right: 14px;
+  background: var(--rose);
+  color: white;
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 10px;
+}
+.card-visual {
+  height: 160px;
+  background: linear-gradient(135deg, var(--blush), var(--petal));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56px;
+}
+.card-body {
+  padding: 1.5rem;
+}
+.card-qty {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--deep);
+}
+.card-desc {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--muted);
+  margin: 6px 0 16px;
+  line-height: 1.7;
+}
+.card-price {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--rose);
+}
+.card-price span {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--muted);
+}
+.card-cta {
+  display: block;
+  margin-top: 1rem;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid var(--petal);
+  color: var(--rose);
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+.card-cta:hover { background: var(--rose); color: white; border-color: var(--rose); }
+
+/* ─── ABOUT ─────────────────────────────────────── */
+#about {
+  background: var(--deep);
+  color: white;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+#about .section-label { color: var(--petal); }
+#about .section-label::before { background: var(--petal); }
+#about .section-h2 { color: white; }
+#about .section-h2 em { color: var(--petal); }
+.about-text {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.9;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 1.5rem;
+}
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+.stat {
+  border-left: 1px solid rgba(240,184,200,0.3);
+  padding-left: 1.25rem;
+}
+.stat-n {
+  font-family: var(--serif);
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--petal);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.5);
+  margin-top: 4px;
+}
+.about-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 420px;
+}
+.about-ring {
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  border: 1px solid rgba(240,184,200,0.2);
+  position: absolute;
+  animation: rotate 20s linear infinite;
+}
+.about-ring:nth-child(2) { width: 380px; height: 380px; animation-direction: reverse; animation-duration: 30s; }
+@keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.about-center-canvas {
+  border-radius: 50%;
+  border: 4px solid rgba(240,184,200,0.3);
+  position: relative; z-index: 1;
+}
+
+/* ─── CONTACT ───────────────────────────────────── */
+#contact { background: var(--blush); }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  margin-top: 3rem;
+  align-items: start;
+}
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.contact-icon {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid var(--petal);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.contact-detail strong {
+  display: block;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-bottom: 4px;
+}
+.contact-detail p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.contact-detail a {
+  color: var(--deep);
+  text-decoration: none;
+  font-size: 16px;
+  font-family: var(--serif);
+}
+
+.qr-section {
+  text-align: center;
+}
+.qr-wrap {
+  display: inline-block;
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(192,85,122,0.1);
+  margin-bottom: 1rem;
+}
+.qr-img {
+  width: 140px; height: 140px;
+  background: var(--blush);
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0 auto;
+}
+/* QR placeholder grid */
+.qr-grid-visual {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  width: 100px;
+  margin: 0 auto;
+}
+.qr-cell { height: 14px; border-radius: 1px; }
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group label {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 12px 16px;
+  border: 1px solid var(--petal);
+  border-radius: 2px;
+  background: white;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s;
+  cursor: none;
+}
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus { border-color: var(--rose); }
+.form-group textarea { resize: vertical; min-height: 100px; }
+.form-submit {
+  padding: 14px;
+  background: var(--rose);
+  color: white;
+  border: none;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  cursor: none;
+  transition: background 0.25s, transform 0.2s;
+}
+.form-submit:hover { background: var(--deep); transform: translateY(-1px); }
+
+/* ─── FOOTER ─────────────────────────────────────── */
+footer {
+  background: var(--text);
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  padding: 2.5rem 3rem;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+}
+footer a { color: var(--petal); text-decoration: none; }
+.footer-logo {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-style: italic;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+/* ─── ANIMATIONS ─────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── MOBILE HAMBURGER ───────────────────────────── */
+.nav-toggle { display: none; }
+
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  #home { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; }
+  .hero-content { padding: 2rem 0; }
+  .hero-visual { height: 300px; }
+  section { padding: 4rem 1.5rem; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .products-grid { grid-template-columns: 1fr 1fr; }
+  #about { grid-template-columns: 1fr; padding: 4rem 1.5rem; }
+  .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ─── NAV ─── -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">Everlasting <span>Flowers</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home"     data-es="Inicio"    data-en="Home">Inicio</a></li>
+    <li><a href="#gallery"  data-es="Galería"   data-en="Gallery">Galería</a></li>
+    <li><a href="#products" data-es="Productos" data-en="Products">Productos</a></li>
+    <li><a href="#about"    data-es="Nosotros"  data-en="About">Nosotros</a></li>
+    <li><a href="#contact"  data-es="Contacto"  data-en="Contact">Contacto</a></li>
+  </ul>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('es')">ES</button>
+    <button class="lang-btn"        onclick="setLang('en')">EN</button>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="home">
+  <div class="hero-blob"></div>
+  <div class="hero-blob"></div>
+  <div class="hero-blob"></div>
+
+  <div class="hero-content">
+    <p class="hero-label" data-es="Rosas Eternas · Hechas a Mano" data-en="Eternal Roses · Handcrafted">
+      Rosas Eternas · Hechas a Mano
+    </p>
+    <h1 class="hero-h1">
+      <span data-es="Flores que<br><em>duran para siempre</em>" data-en="Flowers that<br><em>last forever</em>">
+        Flores que<br><em>duran para siempre</em>
+      </span>
+    </h1>
+    <p class="hero-sub" data-es="Creamos rosas eternas de listón de cinta mantequilla, hechas a mano con amor y dedicación. Cada arreglo cuenta una historia que no se marchita." data-en="We craft eternal roses from satin ribbon, handmade with love and dedication. Every arrangement tells a story that never fades.">
+      Creamos rosas eternas de listón de cinta mantequilla, hechas a mano con amor y dedicación. Cada arreglo cuenta una historia que no se marchita.
+    </p>
+    <a href="#products" class="btn-primary" data-es="Ver Precios" data-en="See Prices">Ver Precios</a>
+    <a href="#gallery"  class="btn-ghost"   data-es="Nuestra Galería" data-en="Our Gallery">Nuestra Galería</a>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-collage">
+      <canvas class="hero-canvas c1" id="hc1" width="200" height="200"></canvas>
+      <canvas class="hero-canvas c2" id="hc2" width="150" height="150"></canvas>
+      <canvas class="hero-canvas c3" id="hc3" width="130" height="130"></canvas>
+      <canvas class="hero-canvas c4" id="hc4" width="170" height="170"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- ─── GALLERY ─── -->
+<section id="gallery">
+  <div class="reveal">
+    <p class="section-label" data-es="Nuestra Galería" data-en="Our Gallery">Nuestra Galería</p>
+    <h2 class="section-h2" data-es="Cada rosa, <em>una obra de arte</em>" data-en="Every rose, <em>a work of art</em>">Cada rosa, <em>una obra de arte</em></h2>
+    <div class="gallery-intro">
+      <p data-es="Elaboradas con listón de cinta mantequilla, nuestras rosas eternas conservan su belleza para siempre. Perfectas para regalar en cualquier ocasión especial." data-en="Crafted from satin ribbon, our eternal roses preserve their beauty forever. Perfect for any special occasion.">
+        Elaboradas con listón de cinta mantequilla, nuestras rosas eternas conservan su belleza para siempre. Perfectas para regalar en cualquier ocasión especial.
+      </p>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="gallery-grid" id="galleryTop"></div>
+    <div class="gallery-row2" id="galleryBottom"></div>
+  </div>
+</section>
+
+<!-- ─── PRODUCTS ─── -->
+<section id="products">
+  <div class="reveal">
+    <p class="section-label" data-es="Nuestros Productos" data-en="Our Products">Nuestros Productos</p>
+    <h2 class="section-h2" data-es="Arreglos <em>personalizados</em>" data-en="Personalized <em>arrangements</em>">Arreglos <em>personalizados</em></h2>
+  </div>
+  <div class="products-grid reveal">
+
+    <div class="product-card">
+      <div class="card-visual">🌸</div>
+      <div class="card-body">
+        <div class="card-qty" data-es="1 Rosa" data-en="1 Rose">1 Rosa</div>
+        <p class="card-desc" data-es="Un gesto íntimo y eterno. Ideal para decir 'te pienso'." data-en="An intimate, eternal gesture. Perfect for saying 'I'm thinking of you'.">Un gesto íntimo y eterno. Ideal para decir 'te pienso'.</p>
+        <div class="card-price">129 <span>C$</span></div>
+        <a href="#contact" class="card-cta" data-es="Ordenar" data-en="Order">Ordenar</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="card-visual">💐</div>
+      <div class="card-body">
+        <div class="card-qty" data-es="5 Rosas" data-en="5 Roses">5 Rosas</div>
+        <p class="card-desc" data-es="Un pequeño ramo lleno de significado y color." data-en="A small bouquet full of meaning and color.">Un pequeño ramo lleno de significado y color.</p>
+        <div class="card-price">350 <span>C$</span></div>
+        <a href="#contact" class="card-cta" data-es="Ordenar" data-en="Order">Ordenar</a>
+      </div>
+    </div>
+
+    <div class="product-card featured">
+      <div class="featured-badge" data-es="Más Popular" data-en="Most Popular">Más Popular</div>
+      <div class="card-visual">🌹</div>
+      <div class="card-body">
+        <div class="card-qty" data-es="10 Rosas" data-en="10 Roses">10 Rosas</div>
+        <p class="card-desc" data-es="Nuestro arreglo más elegido. Un regalo que impresiona." data-en="Our most chosen arrangement. A gift that impresses.">Nuestro arreglo más elegido. Un regalo que impresiona.</p>
+        <div class="card-price">550 <span>C$</span></div>
+        <a href="#contact" class="card-cta" data-es="Ordenar" data-en="Order">Ordenar</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="card-visual">🌷</div>
+      <div class="card-body">
+        <div class="card-qty" data-es="15 Rosas" data-en="15 Roses">15 Rosas</div>
+        <p class="card-desc" data-es="Un ramo generoso para una celebración especial." data-en="A generous bouquet for a special celebration.">Un ramo generoso para una celebración especial.</p>
+        <div class="card-price">700 <span>C$</span></div>
+        <a href="#contact" class="card-cta" data-es="Ordenar" data-en="Order">Ordenar</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="card-visual">🌺</div>
+      <div class="card-body">
+        <div class="card-qty" data-es="25 Rosas" data-en="25 Roses">25 Rosas</div>
+        <p class="card-desc" data-es="Abundancia y romance. Un arreglo que deja sin palabras." data-en="Abundance and romance. An arrangement that leaves you speechless.">Abundancia y romance. Un arreglo que deja sin palabras.</p>
+        <div class="card-price">950 <span>C$</span></div>
+        <a href="#contact" class="card-cta" data-es="Ordenar" data-en="Order">Ordenar</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="card-visual">✨</div>
+      <div class="card-body">
+        <div class="card-qty" data-es="40 Rosas" data-en="40 Roses">40 Rosas</div>
+        <p class="card-desc" data-es="Una declaración de amor. Para momentos inolvidables." data-en="A declaration of love. For unforgettable moments.">Una declaración de amor. Para momentos inolvidables.</p>
+        <div class="card-price">3,000 <span>C$</span></div>
+        <a href="#contact" class="card-cta" data-es="Ordenar" data-en="Order">Ordenar</a>
+      </div>
+    </div>
+
+    <div class="product-card" style="grid-column: 1 / -1; max-width: 340px; margin: 0 auto;">
+      <div class="card-visual" style="font-size: 72px;">👑</div>
+      <div class="card-body">
+        <div class="card-qty" data-es="100 Rosas" data-en="100 Roses">100 Rosas</div>
+        <p class="card-desc" data-es="El regalo definitivo. Imponente, lujoso y eterno." data-en="The ultimate gift. Striking, luxurious, and eternal.">El regalo definitivo. Imponente, lujoso y eterno.</p>
+        <div class="card-price">5,000 <span>C$</span></div>
+        <a href="#contact" class="card-cta" data-es="Ordenar" data-en="Order">Ordenar</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── ABOUT ─── -->
+<section id="about">
+  <div class="reveal">
+    <p class="section-label" data-es="Nuestra Historia" data-en="Our Story">Nuestra Historia</p>
+    <h2 class="section-h2" data-es="Estudiantes con <em>pasión</em>" data-en="Students with <em>passion</em>">Estudiantes con <em>pasión</em></h2>
+    <p class="about-text" data-es="Somos un grupo de estudiantes de noveno grado que decidimos emprender un negocio que combinara creatividad y pasión por las manualidades. Así nació Everlasting Flowers, un taller donde creamos rosas eternas hechas con listón de cinta mantequilla." data-en="We are a group of 9th-grade students who decided to start a business combining creativity and a passion for crafts. Thus Everlasting Flowers was born, a workshop where we create eternal roses made from satin ribbon.">
+      Somos un grupo de estudiantes de noveno grado que decidimos emprender un negocio que combinara creatividad y pasión por las manualidades. Así nació Everlasting Flowers, un taller donde creamos rosas eternas hechas con listón de cinta mantequilla.
+    </p>
+    <p class="about-text" data-es="Con cada rosa, buscamos transmitir un mensaje de amor y belleza duradera. Tu satisfacción es nuestra prioridad, y trabajamos con pasión para superar tus expectativas." data-en="With each rose, we seek to convey a message of lasting love and beauty. Your satisfaction is our priority, and we work with passion to exceed your expectations.">
+      Con cada rosa, buscamos transmitir un mensaje de amor y belleza duradera. Tu satisfacción es nuestra prioridad, y trabajamos con pasión para superar tus expectativas.
+    </p>
+    <div class="about-stats">
+      <div class="stat">
+        <div class="stat-n">100%</div>
+        <div class="stat-label" data-es="Hecho a Mano" data-en="Handmade">Hecho a Mano</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">∞</div>
+        <div class="stat-label" data-es="Dura Para Siempre" data-en="Lasts Forever">Dura Para Siempre</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">7</div>
+        <div class="stat-label" data-es="Tamaños Disponibles" data-en="Sizes Available">Tamaños Disponibles</div>
+      </div>
+    </div>
+  </div>
+  <div class="about-visual reveal">
+    <div class="about-ring"></div>
+    <div class="about-ring"></div>
+    <canvas id="aboutCanvas" width="220" height="220" class="about-center-canvas"></canvas>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section id="contact">
+  <div class="reveal">
+    <p class="section-label" data-es="Contáctanos" data-en="Contact Us">Contáctanos</p>
+    <h2 class="section-h2" data-es="Haz tu <em>pedido</em>" data-en="Place your <em>order</em>">Haz tu <em>pedido</em></h2>
+  </div>
+  <div class="contact-grid reveal">
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-icon">📱</div>
+        <div class="contact-detail">
+          <strong data-es="WhatsApp / Teléfono" data-en="WhatsApp / Phone">WhatsApp / Teléfono</strong>
+          <a href="https://wa.me/50585588756">+505 8558-8756</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div class="contact-detail">
+          <strong data-es="Ubicación" data-en="Location">Ubicación</strong>
+          <p data-es="Nicaragua · Pedidos a domicilio disponibles" data-en="Nicaragua · Home delivery available">Nicaragua · Pedidos a domicilio disponibles</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🕐</div>
+        <div class="contact-detail">
+          <strong data-es="Horario" data-en="Hours">Horario</strong>
+          <p data-es="Lun–Sáb: 8:00am – 6:00pm" data-en="Mon–Sat: 8:00am – 6:00pm">Lun–Sáb: 8:00am – 6:00pm</p>
+        </div>
+      </div>
+      <div class="qr-section">
+        <div class="qr-wrap">
+          <!-- QR visual representation -->
+          <svg width="140" height="140" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="140" height="140" fill="white"/>
+            <!-- Top-left finder pattern -->
+            <rect x="10" y="10" width="40" height="40" rx="4" fill="#3d1a26"/>
+            <rect x="16" y="16" width="28" height="28" rx="2" fill="white"/>
+            <rect x="20" y="20" width="20" height="20" rx="2" fill="#3d1a26"/>
+            <!-- Top-right finder pattern -->
+            <rect x="90" y="10" width="40" height="40" rx="4" fill="#3d1a26"/>
+            <rect x="96" y="16" width="28" height="28" rx="2" fill="white"/>
+            <rect x="100" y="20" width="20" height="20" rx="2" fill="#3d1a26"/>
+            <!-- Bottom-left finder pattern -->
+            <rect x="10" y="90" width="40" height="40" rx="4" fill="#3d1a26"/>
+            <rect x="16" y="96" width="28" height="28" rx="2" fill="white"/>
+            <rect x="20" y="100" width="20" height="20" rx="2" fill="#3d1a26"/>
+            <!-- Data dots -->
+            <rect x="58" y="10" width="8" height="8" fill="#3d1a26"/>
+            <rect x="70" y="10" width="8" height="8" fill="#3d1a26"/>
+            <rect x="58" y="22" width="8" height="8" fill="#c0557a"/>
+            <rect x="70" y="22" width="8" height="8" fill="#3d1a26"/>
+            <rect x="58" y="34" width="8" height="8" fill="#3d1a26"/>
+            <rect x="58" y="58" width="8" height="8" fill="#3d1a26"/>
+            <rect x="70" y="58" width="8" height="8" fill="#c0557a"/>
+            <rect x="82" y="58" width="8" height="8" fill="#3d1a26"/>
+            <rect x="58" y="70" width="8" height="8" fill="#c0557a"/>
+            <rect x="82" y="70" width="8" height="8" fill="#3d1a26"/>
+            <rect x="58" y="82" width="8" height="8" fill="#3d1a26"/>
+            <rect x="70" y="82" width="8" height="8" fill="#c0557a"/>
+            <rect x="82" y="82" width="8" height="8" fill="#3d1a26"/>
+            <rect x="94" y="58" width="8" height="8" fill="#3d1a26"/>
+            <rect x="106" y="58" width="8" height="8" fill="#c0557a"/>
+            <rect x="118" y="58" width="8" height="8" fill="#3d1a26"/>
+            <rect x="94" y="70" width="8" height="8" fill="#3d1a26"/>
+            <rect x="118" y="70" width="8" height="8" fill="#c0557a"/>
+            <rect x="94" y="82" width="8" height="8" fill="#c0557a"/>
+            <rect x="106" y="82" width="8" height="8" fill="#3d1a26"/>
+            <rect x="118" y="82" width="8" height="8" fill="#3d1a26"/>
+            <rect x="10" y="58" width="8" height="8" fill="#3d1a26"/>
+            <rect x="22" y="58" width="8" height="8" fill="#c0557a"/>
+            <rect x="34" y="58" width="8" height="8" fill="#3d1a26"/>
+            <rect x="46" y="58" width="8" height="8" fill="#3d1a26"/>
+            <rect x="10" y="70" width="8" height="8" fill="#c0557a"/>
+            <rect x="34" y="70" width="8" height="8" fill="#3d1a26"/>
+            <rect x="46" y="70" width="8" height="8" fill="#c0557a"/>
+            <rect x="10" y="82" width="8" height="8" fill="#3d1a26"/>
+            <rect x="22" y="82" width="8" height="8" fill="#3d1a26"/>
+            <rect x="46" y="82" width="8" height="8" fill="#3d1a26"/>
+            <rect x="94" y="94" width="8" height="8" fill="#3d1a26"/>
+            <rect x="106" y="94" width="8" height="8" fill="#c0557a"/>
+            <rect x="118" y="94" width="8" height="8" fill="#3d1a26"/>
+            <rect x="94" y="106" width="8" height="8" fill="#c0557a"/>
+            <rect x="118" y="106" width="8" height="8" fill="#3d1a26"/>
+            <rect x="94" y="118" width="8" height="8" fill="#3d1a26"/>
+            <rect x="106" y="118" width="8" height="8" fill="#3d1a26"/>
+            <rect x="118" y="118" width="8" height="8" fill="#c0557a"/>
+          </svg>
+        </div>
+        <p style="font-size:12px;color:var(--muted);" data-es="Escanea para contactarnos en WhatsApp" data-en="Scan to contact us on WhatsApp">Escanea para contactarnos en WhatsApp</p>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <div class="form-group">
+        <label data-es="Tu Nombre" data-en="Your Name">Tu Nombre</label>
+        <input type="text" placeholder="María García">
+      </div>
+      <div class="form-group">
+        <label data-es="Teléfono / WhatsApp" data-en="Phone / WhatsApp">Teléfono / WhatsApp</label>
+        <input type="tel" placeholder="+505 0000-0000">
+      </div>
+      <div class="form-group">
+        <label data-es="¿Qué deseas ordenar?" data-en="What would you like to order?">¿Qué deseas ordenar?</label>
+        <select>
+          <option data-es="1 Rosa — 129 C$"    data-en="1 Rose — 129 C$">1 Rosa — 129 C$</option>
+          <option data-es="5 Rosas — 350 C$"   data-en="5 Roses — 350 C$">5 Rosas — 350 C$</option>
+          <option data-es="10 Rosas — 550 C$"  data-en="10 Roses — 550 C$">10 Rosas — 550 C$</option>
+          <option data-es="15 Rosas — 700 C$"  data-en="15 Roses — 700 C$">15 Rosas — 700 C$</option>
+          <option data-es="25 Rosas — 950 C$"  data-en="25 Roses — 950 C$">25 Rosas — 950 C$</option>
+          <option data-es="40 Rosas — 3,000 C$" data-en="40 Roses — 3,000 C$">40 Rosas — 3,000 C$</option>
+          <option data-es="100 Rosas — 5,000 C$" data-en="100 Roses — 5,000 C$">100 Rosas — 5,000 C$</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label data-es="Mensaje o detalles especiales" data-en="Message or special details">Mensaje o detalles especiales</label>
+        <textarea placeholder="Color preferido, fecha de entrega, dedicatoria..."></textarea>
+      </div>
+      <button class="form-submit" data-es="Enviar Pedido por WhatsApp" data-en="Send Order via WhatsApp"
+        onclick="sendWhatsApp()">Enviar Pedido por WhatsApp</button>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-logo">Everlasting Flowers</div>
+  <p>© 2025 Everlasting Flowers · <span data-es="Todos los derechos reservados" data-en="All rights reserved">Todos los derechos reservados</span></p>
+  <p style="margin-top:6px;"><a href="https://wa.me/50585588756">+505 8558-8756</a></p>
+</footer>
+
+<script>
+/* ── Cursor ─────────────────────────── */
+const cursor     = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursorRing');
+document.addEventListener('mousemove', e => {
+  cursor.style.left     = e.clientX + 'px';
+  cursor.style.top      = e.clientY + 'px';
+  setTimeout(() => {
+    cursorRing.style.left = e.clientX + 'px';
+    cursorRing.style.top  = e.clientY + 'px';
+  }, 80);
+});
+document.querySelectorAll('a, button, .product-card, .gallery-item').forEach(el => {
+  el.addEventListener('mouseenter', () => { cursorRing.style.width = '56px'; cursorRing.style.height = '56px'; });
+  el.addEventListener('mouseleave', () => { cursorRing.style.width = '36px'; cursorRing.style.height = '36px'; });
+});
+
+/* ── Nav scroll ─────────────────────── */
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+/* ── Language toggle ────────────────── */
+let currentLang = 'es';
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach((b, i) => {
+    b.classList.toggle('active', (i === 0 && lang === 'es') || (i === 1 && lang === 'en'));
+  });
+  document.querySelectorAll('[data-es]').forEach(el => {
+    const txt = el.getAttribute('data-' + lang);
+    if (txt) {
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = txt;
+      else if (el.tagName === 'OPTION') el.textContent = txt;
+      else el.innerHTML = txt;
+    }
+  });
+  document.documentElement.lang = lang;
+}
+
+/* ── Reveal on scroll ───────────────── */
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+revealEls.forEach(el => io.observe(el));
+
+/* ── Draw flower canvases from strip ── */
+const stripSrc = '/mnt/user-data/uploads/1779662706492__7BD248D1-FD22-4362-A741-D97439B467CF_.png';
+const strip = new Image();
+strip.onload = function() {
+  const total = 7;
+  const sw = strip.naturalWidth / total;
+  const sh = strip.naturalHeight;
+
+  function drawCircle(canvas, idx) {
+    const s = canvas.width;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, s, s);
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(s/2, s/2, s/2, 0, Math.PI*2);
+    ctx.clip();
+    ctx.drawImage(strip, idx * sw, 0, sw, sh, 0, 0, s, s);
+    ctx.restore();
+  }
+
+  // Hero canvases
+  [[0,1],[1,2],[2,3],[3,4]].forEach(([idx, canvasN]) => {
+    const c = document.getElementById('hc' + canvasN);
+    if (c) drawCircle(c, idx);
+  });
+
+  // Gallery top row (4 circles)
+  const gallTop = document.getElementById('galleryTop');
+  gallTop.innerHTML = '';
+  [0,1,2,3].forEach(idx => {
+    const item = document.createElement('div');
+    item.className = 'gallery-item';
+    const cv = document.createElement('canvas');
+    cv.width = 160; cv.height = 160;
+    cv.style.width = '100%'; cv.style.height = '100%';
+    item.appendChild(cv);
+    gallTop.appendChild(item);
+    drawCircle(cv, idx);
+  });
+
+  // Gallery bottom row (3 circles)
+  const gallBot = document.getElementById('galleryBottom');
+  gallBot.innerHTML = '';
+  [4,5,6].forEach(idx => {
+    const item = document.createElement('div');
+    item.className = 'gallery-item';
+    const cv = document.createElement('canvas');
+    cv.width = 160; cv.height = 160;
+    cv.style.width = '100%'; cv.style.height = '100%';
+    item.appendChild(cv);
+    gallBot.appendChild(item);
+    drawCircle(cv, idx);
+  });
+
+  // About center
+  const ac = document.getElementById('aboutCanvas');
+  if (ac) drawCircle(ac, 2);
+};
+strip.src = stripSrc;
+
+/* ── WhatsApp order ─────────────────── */
+function sendWhatsApp() {
+  const name = document.querySelector('input[type="text"]').value || 'Cliente';
+  const phone = document.querySelector('input[type="tel"]').value || '';
+  const order = document.querySelector('select').value;
+  const msg = document.querySelector('textarea').value || '';
+  const text = encodeURIComponent(
+    `Hola! Me llamo ${name}.\nQuiero ordenar: ${order}\nDetalles: ${msg}\nMi teléfono: ${phone}`
+  );
+  window.open('https://wa.me/50585588756?text=' + text, '_blank');
+}
+</script>
+</body>
+</html>
